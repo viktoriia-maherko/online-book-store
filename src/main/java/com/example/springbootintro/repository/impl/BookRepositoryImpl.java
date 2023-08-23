@@ -2,13 +2,12 @@ package com.example.springbootintro.repository.impl;
 
 import com.example.springbootintro.model.Book;
 import com.example.springbootintro.repository.BookRepository;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public class BookRepositoryImpl implements BookRepository {
