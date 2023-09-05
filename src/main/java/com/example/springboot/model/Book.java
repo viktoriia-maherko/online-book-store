@@ -1,11 +1,12 @@
 package com.example.springboot.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
@@ -20,16 +21,17 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @NotNull
     private String title;
-    @Column(nullable = false)
+    @NotNull
     private String author;
-    @Column(nullable = false)
+    @NotNull
     private String isbn;
-    @Column(nullable = false)
+    @NotNull
+    @Min(0)
     private BigDecimal price;
     private String description;
     private String coverImage;
-    @Column(nullable = false)
+    @NotNull
     private boolean isDeleted = false;
 }
