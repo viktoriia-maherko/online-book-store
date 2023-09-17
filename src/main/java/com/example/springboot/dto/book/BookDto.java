@@ -1,4 +1,4 @@
-package com.example.springboot.dto;
+package com.example.springboot.dto.book;
 
 import java.math.BigDecimal;
 import lombok.Data;

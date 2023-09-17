@@ -1,4 +1,4 @@
-package com.example.springboot.dto;
+package com.example.springboot.dto.book;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
