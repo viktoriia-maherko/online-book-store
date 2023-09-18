@@ -8,7 +8,6 @@ import com.example.springboot.mapper.BookMapper;
 import com.example.springboot.model.Book;
 import com.example.springboot.repository.SpecificationBuilder;
 import com.example.springboot.repository.book.BookRepository;
-import com.example.springboot.repository.user.UserRepository;
 import com.example.springboot.service.BookService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
-    private final UserRepository userRepository;
     private final BookMapper bookMapper;
     private final SpecificationBuilder<Book> specificationBuilder;
 
