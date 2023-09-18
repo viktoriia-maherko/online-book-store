@@ -1,6 +1,6 @@
 package com.example.springboot.repository.book;
 
-import com.example.springboot.dto.BookSearchParameters;
+import com.example.springboot.dto.book.BookSearchParameters;
 import com.example.springboot.model.Book;
 import com.example.springboot.repository.SpecificationBuilder;
 import lombok.RequiredArgsConstructor;
