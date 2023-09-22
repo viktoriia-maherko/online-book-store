@@ -1,6 +1,7 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.dto.book.BookDto;
+import com.example.springboot.dto.book.BookDtoWithoutCategoryIds;
 import com.example.springboot.dto.book.BookSearchParameters;
 import com.example.springboot.dto.book.CreateBookRequestDto;
 import com.example.springboot.service.BookService;
@@ -32,7 +33,7 @@ public class BookController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping
     @Operation(summary = "Get all books", description = "Get a list of all available books")
-    public List<BookDto> getAll(Pageable pageable) {
+    public List<BookDtoWithoutCategoryIds> getAll(Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
