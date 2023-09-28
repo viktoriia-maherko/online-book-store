@@ -18,4 +18,12 @@ public class UserRegistrationRequestDto {
     private String password;
 
     private String repeatPassword;
+
+    @NotBlank
+    @Size(max = 50)
+    private String firstName;
+    @NotBlank
+    @Size(max = 50)
+    private String lastName;
+    private String shippingAddress;
 }
