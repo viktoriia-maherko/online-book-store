@@ -52,16 +52,16 @@ public class OrderController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value = "/{orderId}/items")
-    @Operation(summary = "Get all orders",
-            description = "Retrieve user's order history")
+    @Operation(summary = "Get order items",
+            description = "Retrieve all order items for a specific order")
     public Set<OrderItemDto> getOrderItemsByOrderId(@PathVariable Long orderId) {
         return orderService.getOrderItemsByOrderId(orderId);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value = "/api/orders/{orderId}/items/{itemId}")
-    @Operation(summary = "Get all orders",
-            description = "Retrieve user's order history")
+    @Operation(summary = "Get order item",
+            description = "Retrieve a specific OrderItem within an order")
     public OrderItemDto getOrderItemFromOrder(@PathVariable Long orderId,
                                               @PathVariable Long itemId) {
         return orderService.getOrderItemFromOrder(orderId, itemId);

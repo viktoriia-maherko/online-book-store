@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderItems(getOrderItemsByUserId(userId));
         order.setStatus(Order.Status.PENDING);
         order.setOrderDate(LocalDateTime.now());
-        return null;
+        return orderMapper.toDto(order);
     }
 
     @Override
@@ -70,7 +70,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderItemDto getOrderItemFromOrder(Long orderId, Long orderItemId) {
         OrderItem orderItem = orderItemRepository
-                .findOrderItemByIdAndOrderId(orderItemId, orderId);
+                .findOrderItemByIdAndOrderId(orderItemId, orderId)
+                .orElseThrow(()
+                        -> new RuntimeException("Can't find order item by order id "
+                        + orderId + " and order item id " + orderItemId));
         return orderItemMapper.toDto(orderItem);
     }
 
