@@ -15,6 +15,7 @@ import com.example.springboot.repository.user.UserRepository;
 import com.example.springboot.service.OrderService;
 import com.example.springboot.service.ShoppingCartService;
 import jakarta.transaction.Transactional;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -40,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
                         -> new RuntimeException("Can't find user by id " + userId));
         Order order = new Order();
         order.setUser(user);
-        Set<OrderItem> orders = shoppingCartService.getShoppingCartByUserId(userId)
+        Set<OrderItem> orderItems = shoppingCartService.getShoppingCartByUserId(userId)
                 .getCartItems()
                 .stream()
                 .map(orderItemMapper::toEntity)
@@ -48,6 +49,8 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderItems(getOrderItemsByUserId(userId));
         order.setStatus(Order.Status.PENDING);
         order.setOrderDate(LocalDateTime.now());
+        order.setTotal(calculateTotal(orderItems));
+        order.setShippingAddress(orderRequestDto.getShippingAddress());
         return orderMapper.toDto(order);
     }
 
@@ -92,5 +95,13 @@ public class OrderServiceImpl implements OrderService {
                 .stream()
                 .map(orderItemMapper::toEntity)
                 .collect(Collectors.toSet());
+    }
+
+    private BigDecimal calculateTotal(Set<OrderItem> orderItems) {
+        BigDecimal total = BigDecimal.valueOf(0);
+        return orderItems.stream()
+                .map(sc -> sc.getPrice()
+                        .multiply(BigDecimal.valueOf(sc.getQuantity())))
+                .reduce(total, BigDecimal::add);
     }
 }
