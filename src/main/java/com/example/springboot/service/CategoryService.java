@@ -1,6 +1,7 @@
 package com.example.springboot.service;
 
 import com.example.springboot.dto.category.CategoryDto;
+import com.example.springboot.dto.category.CreateCategoryRequestDto;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 
@@ -9,9 +10,9 @@ public interface CategoryService {
 
     CategoryDto getById(Long id);
 
-    CategoryDto save(CategoryDto categoryDto);
+    CategoryDto save(CreateCategoryRequestDto categoryDto);
 
-    CategoryDto update(Long id, CategoryDto categoryDto);
+    CategoryDto update(Long id, CreateCategoryRequestDto categoryDto);
 
     void deleteById(Long id);
 }
