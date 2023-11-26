@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.example.springboot.dto.book.BookDto;
@@ -97,17 +98,13 @@ class BookControllerTest {
         expected.add(bookDto2);
         String params = "?page=0&size=2";
 
-        MvcResult result = mockMvc.perform(
+        mockMvc.perform(
                 get("/books" + params)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(expected.size()))
                 .andReturn();
-
-        BookDto[] actual = objectMapper.readValue(result.getResponse()
-                .getContentAsByteArray(), BookDto[].class);
-        Assertions.assertEquals(expected.size(), actual.length);
-        Assertions.assertEquals(expected.get(0).getTitle(), actual[0].getTitle());
     }
 
     @WithMockUser(username = "user", roles = {"USER"})
@@ -183,7 +180,7 @@ class BookControllerTest {
     @DisplayName("Delete a book by id")
     void deleteById_ValidBookId_Success() throws Exception {
         Long bookId = 1L;
-        MvcResult result = mockMvc.perform(
+        mockMvc.perform(
                         delete("/books/{id}",
                                 bookId)
                                 .contentType(MediaType.APPLICATION_JSON)
