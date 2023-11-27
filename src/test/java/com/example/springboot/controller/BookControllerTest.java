@@ -115,7 +115,6 @@ class BookControllerTest {
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.title").value("Harry Potter"))
                 .andExpect(jsonPath("$.author").value("Rouling"))
-                .andExpect(jsonPath("$.title").value("Harry Potter"))
                 .andReturn();
     }
 
@@ -133,7 +132,6 @@ class BookControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Harry Potter"))
                 .andExpect(jsonPath("$.author").value("Rouling"))
-                .andExpect(jsonPath("$.title").value("Harry Potter"))
                 .andReturn();
     }
 
