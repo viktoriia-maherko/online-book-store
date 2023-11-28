@@ -1,6 +1,7 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.dto.category.CategoryDto;
+import com.example.springboot.dto.category.CreateCategoryRequestDto;
 import com.example.springboot.service.BookService;
 import com.example.springboot.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,7 +33,7 @@ public class CategoryController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     @Operation(summary = "Create a new category", description = "Create a new category")
-    public CategoryDto createCategory(@RequestBody @Valid CategoryDto categoryDto) {
+    public CategoryDto createCategory(@RequestBody @Valid CreateCategoryRequestDto categoryDto) {
         return categoryService.save(categoryDto);
     }
 
@@ -55,7 +56,7 @@ public class CategoryController {
     @PutMapping(value = "/{id}")
     @Operation(summary = "Update a category", description = "Update a category by id")
     public CategoryDto updateCategory(@PathVariable Long id,
-                                      @RequestBody @Valid CategoryDto categoryDto) {
+                                      @RequestBody @Valid CreateCategoryRequestDto categoryDto) {
         return categoryService.update(id, categoryDto);
     }
 

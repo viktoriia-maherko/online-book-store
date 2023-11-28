@@ -1,6 +1,7 @@
 package com.example.springboot.service.impl;
 
 import com.example.springboot.dto.category.CategoryDto;
+import com.example.springboot.dto.category.CreateCategoryRequestDto;
 import com.example.springboot.exception.EntityNotFoundException;
 import com.example.springboot.mapper.CategoryMapper;
 import com.example.springboot.model.Category;
@@ -18,7 +19,7 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryMapper categoryMapper;
 
     @Override
-    public CategoryDto save(CategoryDto categoryDto) {
+    public CategoryDto save(CreateCategoryRequestDto categoryDto) {
         Category category = categoryMapper.toEntity(categoryDto);
         return categoryMapper.toDto(categoryRepository.save(category));
     }
@@ -38,11 +39,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto update(Long id, CategoryDto categoryDto) {
+    public CategoryDto update(Long id, CreateCategoryRequestDto categoryDto) {
         Category category = categoryMapper.toEntity(categoryDto);
         category.setId(id);
-        Category savedCategory = categoryRepository.save(category);
-        return categoryMapper.toDto(savedCategory);
+        return categoryMapper.toDto(categoryRepository.save(category));
     }
 
     @Override
