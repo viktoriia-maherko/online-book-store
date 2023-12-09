@@ -27,12 +27,11 @@ import org.springframework.http.MediaType;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class CategoryControllerTest {
+public class CategoryControllerTest {
     protected static MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
@@ -129,7 +128,7 @@ class CategoryControllerTest {
     void getAll_GivenCategoriesId_ReturnsAllBooksFromSuchCategory() throws Exception {
         Long categoryId = 1L;
 
-        MvcResult result = mockMvc.perform(
+        mockMvc.perform(
                         get("/categories/{id}/books", categoryId)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
