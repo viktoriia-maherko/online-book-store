@@ -1,8 +1,9 @@
-package com.example.springboot.repository.book;
+package com.example.springboot.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.springboot.model.Book;
+import com.example.springboot.repository.book.BookRepository;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

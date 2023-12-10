@@ -18,10 +18,10 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ShoppingCartServiceImpl implements ShoppingCartService {
-    private ShoppingCartRepository shoppingCartRepository;
-    private CartItemRepository cartItemRepository;
-    private ShoppingCartMapper shoppingCartMapper;
-    private CartItemMapper cartItemMapper;
+    private final ShoppingCartRepository shoppingCartRepository;
+    private final CartItemRepository cartItemRepository;
+    private final ShoppingCartMapper shoppingCartMapper;
+    private final CartItemMapper cartItemMapper;
 
     @Override
     public ShoppingCartDto getShoppingCartByUserId(Long userId) {
@@ -65,10 +65,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void removeBookFromTheShoppingCart(Long cartItemId) {
-        CartItem cartItem = cartItemRepository.findById(cartItemId)
-                .orElseThrow(() -> new RuntimeException(
-                "Can't find cart item by id: " + cartItemId
-        ));
-        cartItemRepository.delete(cartItem);
+        cartItemRepository.deleteById(cartItemId);
     }
 }

@@ -162,7 +162,7 @@ class BookServiceTest {
 
     @Test
     @DisplayName("Verify method delete was invoked")
-    void deleteById() {
+    void deleteById_ValidBookId_Success() {
         Long bookId = 1L;
         bookService.deleteById(bookId);
         verify(bookRepository, times(1)).deleteById(bookId);

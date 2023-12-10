@@ -126,7 +126,7 @@ class CategoryServiceTest {
     @Test
     @DisplayName("Verify the categoryDto was updated correctly "
             + "by valid categoryId and categoryRequestDto")
-    void update() {
+    void update_ValidCategoryIdAndCategoryRequestDto_ShouldReturnCategoryDto() {
         CreateCategoryRequestDto requestDto = createCategoryRequestDto();
         requestDto.setName("Non-fiction");
         Category category = createCategory();
@@ -147,7 +147,7 @@ class CategoryServiceTest {
 
     @Test
     @DisplayName("Verify method delete was invoked")
-    void deleteById() {
+    void deleteById_ValidCategoryId_Success() {
         Long categoryId = 1L;
 
         categoryService.deleteById(categoryId);
