@@ -15,13 +15,15 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
+@Data
 @Entity
-@Setter
-@Getter
 @Table(name = "orders")
+@SQLDelete(sql = "UPDATE orders SET is_deleted = true WHERE id = ?")
+@Where(clause = "is_deleted = false")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +31,8 @@ public class Order {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "varchar", nullable = false)
     private Status status;
     @Column(nullable = false)
     private BigDecimal total;
